@@ -1,9 +1,7 @@
-import 'package:english_words/english_words.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 
 void main() {
-  runApp(MyApp());
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
@@ -11,37 +9,59 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider(
-      create: (context) => MyAppState(),
-      child: MaterialApp(
-        title: 'Namer App',
-        theme: ThemeData(
-          useMaterial3: true,
-          colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepOrange),
+    return MaterialApp(
+      home: Scaffold(
+        appBar: AppBar(
+          title: const Text('Catálogo de Películas'),
         ),
-        home: MyHomePage(),
+        body: const MovieList(),
       ),
     );
   }
 }
 
-class MyAppState extends ChangeNotifier {
-  var current = WordPair.random();
-}
+class MovieList extends StatelessWidget {
+  const MovieList({super.key});
 
-class MyHomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Welcome to Flutter',
-      home: Scaffold(
-        appBar: AppBar(
-          title: Text('Welcome to Flutter'),
+    return Column(
+      children: [
+        const Text(
+          'Mis Películas Favoritas',
+          style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
         ),
-        body: Center(
-          child: Text('Hello World'),
+        const SizedBox(height: 20),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: [
+            Container(
+              color: Colors.blue,
+              padding: const EdgeInsets.all(10),
+              child: const Text('Acción'),
+            ),
+            Container(
+              color: Colors.green,
+              padding: const EdgeInsets.all(10),
+              child: const Text('Comedia'),
+            ),
+          ],
         ),
-      ),
+        const SizedBox(height: 20),
+        Stack(
+          children: [
+            Container(
+              height: 150,
+              color: Colors.grey[300],
+            ),
+            const Positioned(
+              bottom: 10,
+              left: 10,
+              child: Text('Película Destacada'),
+            ),
+          ],
+        ),
+      ],
     );
   }
 }
