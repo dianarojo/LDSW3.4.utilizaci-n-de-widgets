@@ -5,63 +5,66 @@ void main() {
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+  const MyApp({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: Scaffold(
-        appBar: AppBar(
-          title: const Text('Catálogo de Películas'),
-        ),
-        body: const MovieList(),
+      title: 'MiApp',
+      theme: ThemeData(
+        primarySwatch: Colors.blue,
       ),
+      home: const HomeScreen(),
+      debugShowCheckedModeBanner: false,
     );
   }
 }
 
-class MovieList extends StatelessWidget {
-  const MovieList({super.key});
+class HomeScreen extends StatelessWidget {
+  const HomeScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        const Text(
-          'Mis Películas Favoritas',
-          style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-        ),
-        const SizedBox(height: 20),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: [
-            Container(
-              color: Colors.blue,
-              padding: const EdgeInsets.all(10),
-              child: const Text('Acción'),
+    return Scaffold(
+      body: Stack(
+        children: [
+          Positioned.fill(
+            child: Image.asset(
+              'assets/images/background.jpg', // <- coloca aquí tu imagen
+              fit: BoxFit.cover,
             ),
-            Container(
-              color: Colors.green,
-              padding: const EdgeInsets.all(10),
-              child: const Text('Comedia'),
+          ),
+          Center(
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: const [
+                Icon(
+                  Icons.flutter_dash,
+                  size: 84,
+                  semanticLabel: 'Icono de la app',
+                ),
+                SizedBox(height: 20),
+                Text(
+                  'Hello World',
+                  style: TextStyle(
+                    fontSize: 32,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.white,
+                  ),
+                ),
+                SizedBox(height: 8),
+                Text(
+                  'Mi Aplicación',
+                  style: TextStyle(
+                    fontSize: 18,
+                    color: Colors.white70,
+                  ),
+                ),
+              ],
             ),
-          ],
-        ),
-        const SizedBox(height: 20),
-        Stack(
-          children: [
-            Container(
-              height: 150,
-              color: Colors.grey[300],
-            ),
-            const Positioned(
-              bottom: 10,
-              left: 10,
-              child: Text('Película Destacada'),
-            ),
-          ],
-        ),
-      ],
+          ),
+        ],
+      ),
     );
   }
 }
